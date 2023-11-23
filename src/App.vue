@@ -1,0 +1,19 @@
+<template>
+  <h1>{{ msg }}</h1>
+  <Hello />
+</template>
+
+<script>
+import Hello from '@/components/Hello.vue';
+
+export default {
+  components: {
+    Hello,
+  },
+  data() {
+    return {
+      msg: 'Hello WEbPAck!',
+    };
+  },
+};
+</script>
