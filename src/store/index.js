@@ -1,36 +1,44 @@
-import { reactive } from 'vue'; // state에 반응성을 부여하기 위해 reactive를 import합니다.
+// Vuex store
+import { createStore } from 'vuex';
 
-// 서로 관계가 없는 컴포넌트끼리 데이터를 공유하기 위한 Vuex의 store를 생성합니다.
-export const state = reactive({
-  msg: 'Hello Vuex',
-  count: 1,
+export default createStore({
+  // data()와 유사
+  state() {
+    // component의 data()와 유사, 객체 자체로 선언하면 참조 문제가 발생
+    return {
+      msg: 'Hello Vue',
+      count: 1,
+    };
+  },
+  // computed()를 참조하는 역할
+  getters: {
+    reversedMsg(state) {
+      return state.msg.split('').reverse().join('');
+    },
+  },
+  // 데이터(state)를 변경하는 역할
+  mutations: {
+    increment(state) {
+      // 첫 번째 인자로 state를 넘겨주면, createStore의 state에 접근할 수 있음. 직접적 접근 불가
+      state.count++;
+    },
+    decrement(state) {
+      state.count--;
+    },
+    updateMsg(state, newMsg) {
+      state.msg = newMsg;
+    },
+  },
+  // 그 외 비동기 로직을 담당하는 역할
+  actions: {
+    // context => state, getters, commit, dispatch 제공
+    // mutation을 사용하고 싶다면, commit을 사용하면 된다.
+    // 구조분해 할당 context => { state, getters, commit, dispatch }
+    async fetchTodo({ commit }) {
+      const todo = await fetch(
+        'https://jsonplaceholder.typicode.com/todos/1'
+      ).then((res) => res.json());
+      commit('updateMsg', todo.title); // (실행 시키려는 mutation 이름, 전달하려는 데이터)
+    },
+  },
 });
-
-export const getters = {
-  reversedMsg() {
-    return state.msg.split('').reverse().join('');
-  },
-};
-
-// mutations는 state를 변경하는 메서드입니다.(데이터 변경/추적)
-export const mutations = {
-  increaseCount() {
-    state.count++;
-  },
-  decreaseCount() {
-    state.count--;
-  },
-  updateMsg(newMsg) {
-    state.msg = newMsg;
-  },
-};
-
-// actions는 비동기 로직을 선언하는 메서드입니다.(데이터 변경/추적 제외)
-export const actions = {
-  async fetchTodo() {
-    const todo = await fetch(
-      'https://jsonplaceholder.typicode.com/todos/1'
-    ).then((res) => res.json());
-    mutations.updateMsg(todo.title); // mutations를 호출하여 state를 변경합니다. (직접 변경 X, state.msg = todo.title)
-  },
-};
