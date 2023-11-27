@@ -1,5 +1,5 @@
 export default {
-  namespaced: true, // namespace를 사용하면 모듈화된 store를 사용할 때 모듈명을 함께 사용해야 한다.
+  namespaced: true, // namespaced를 사용하면 store를 모듈화 할 수 있다.
   state() {
     return {
       message: 'Hello Store Module',
