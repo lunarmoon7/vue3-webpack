@@ -1,8 +1,16 @@
 <template>
-  <RouterLink to="/">Home</RouterLink>
-  <RouterLink to="/about">About</RouterLink>
+  <RouterLink
+    :to="{
+      name: 'documents-id',
+      params: { id: '777' },
+      query: { name: 'hwisik' },
+    }"
+    >Documents ID</RouterLink
+  >
+  <button @click="$router.push({ name: 'home' })">Home</button>
+  <button @click="$router.push({ name: 'about' })">About</button>
   <!-- RouterView는 RouterLink에 연결된 컴포넌트의 template을 보여준다. -->
-  <RouterView /> 
+  <RouterView />
 </template>
 
 <script>
