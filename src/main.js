@@ -6,4 +6,5 @@ const { createApp } = Vue;
 
 const app = createApp(App);
 app.use(store);
+
 const vm = app.mount('#app');

@@ -1,8 +1,8 @@
 <template>
+  <h1>{{ msg }}</h1>
+  <h2>{{ storeMsg }}</h2>
+  <h2>{{ storeMessage }}</h2>
   <Hello />
-  <button @click="increase">Increase</button>
-  <World />
-  <button @click="fetchTodo">Click To Update</button>
 </template>
 
 <script>
@@ -20,13 +20,13 @@ export default {
       msg: 'Hello Vue!',
     };
   },
-  methods: {
-    increase() {
-      this.$store.commit('increment'); // store 내부의 increment 뮤테이션을 호출
+  computed: {
+    storeMsg() {
+      return this.$store.state.msg;
     },
-    fetchTodo() {
-      // actions를 사용하고 싶다면, dispatch를 사용한다.
-      this.$store.dispatch('fetchTodo'); // store 내부의 fetchTodo 액션을 호출
+    storeMessage() {
+      // 모듈로 만든 message를 사용하기
+      return this.$store.state.message.message;
     },
   },
 };
