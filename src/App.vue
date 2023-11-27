@@ -1,25 +1,17 @@
 <template>
-  <h1 v-if="msg" class="message" @click="log">{{ msg }}</h1>
   <Hello />
+  <World />
 </template>
 
 <script>
 import Hello from '@/components/Hello.vue';
+import World from '@/components/World.vue';
 
 export default {
+  name: 'App',
   components: {
     Hello,
-  },
-  data() {
-    return {
-      msg: 'Hello WEbPAck!',
-    };
-  },
-  methods: {
-    log() {
-      window.addEventListener();
-      document.querySelector();
-    },
+    World,
   },
 };
 </script>
