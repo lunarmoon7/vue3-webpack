@@ -1,17 +1,16 @@
 <template>
-  <Hello />
-  <World />
+  <RouterLink to="/">Home</RouterLink>
+  <RouterLink to="/about">About</RouterLink>
+  <!-- RouterView는 RouterLink에 연결된 컴포넌트의 template을 보여준다. -->
+  <RouterView /> 
 </template>
 
 <script>
-import Hello from '@/components/Hello.vue';
-import World from '@/components/World.vue';
-
 export default {
   name: 'App',
-  components: {
-    Hello,
-    World,
+  data() {
+    return {};
   },
+  components: {},
 };
 </script>
